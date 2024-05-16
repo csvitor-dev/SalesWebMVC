@@ -18,6 +18,13 @@ namespace SalesWebMVC.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            ViewData["Author"] = "Vitor Costa de Sousa";
+            ViewData["Alias"] = "csdev";
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
