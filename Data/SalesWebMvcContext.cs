@@ -14,6 +14,11 @@ namespace SalesWebMVC.Data
         {
         }
 
-        public DbSet<SalesWebMVC.Models.Department> Department { get; set; } = default!;
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseMySQL("server=localhost;database=saleswebmvcdb;user=MVCuser;password=mVC#1246;");
+        }
+
+        public DbSet<Department> Department { get; set; } = default!;
     }
 }
