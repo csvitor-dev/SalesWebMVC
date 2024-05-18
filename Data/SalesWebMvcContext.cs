@@ -10,7 +10,9 @@ namespace SalesWebMVC.Data
 {
     public class SalesWebMvcContext(DbContextOptions<SalesWebMvcContext> options) : DbContext(options)
     {
-         public DbSet<Department> Department { get; set; } = default!;
+        public DbSet<Department> Department { get; set; } = default!;
+        public DbSet<Seller> Seller { get; set; } = default!;
+        public DbSet<SalesRecord> SalesRecord { get; set; } = default!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,7 +23,33 @@ namespace SalesWebMVC.Data
             modelBuilder.Entity<Department>(entity =>
             {
                 entity.HasKey(e => e.ID);
+
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Seller>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.BirthDate).IsRequired();
+                entity.Property(e => e.BaseSalary).IsRequired();
+
+                entity.HasOne(e => e.Department).WithMany(d => d.Sellers)
+                .HasForeignKey(e => e.DeparmentID).IsRequired();
+            });
+
+            modelBuilder.Entity<SalesRecord>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+
+                entity.Property(e => e.Date).IsRequired();
+                entity.Property(e => e.Amout).IsRequired();
+                entity.Property(e => e.Status).IsRequired();
+
+                entity.HasOne(e => e.Seller).WithMany(s => s.Sales)
+                .HasForeignKey(e => e.SellerID).IsRequired();
             });
         }
     }
