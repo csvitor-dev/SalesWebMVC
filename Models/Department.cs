@@ -1,4 +1,15 @@
 ﻿namespace SalesWebMVC.Models
 {
-    public record Department(int Id, string Name);
+    public class Department
+    {
+        public int ID { get; }
+        public string? Name { get; set; }
+
+        public Department() { }
+        public Department(int id, string name)
+        {
+            ID = id;
+            Name = name;
+        }
+    }
 }
