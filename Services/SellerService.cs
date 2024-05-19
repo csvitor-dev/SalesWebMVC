@@ -7,7 +7,7 @@ namespace SalesWebMVC.Services
     {
         private readonly SalesWebMvcContext _context = context;
 
-        public List<Seller> FindAll() => _context.Seller.ToList(); // For now, it will be synchronous
+        public List<Seller> FindAll() => [.. _context.Seller]; // For now, it will be synchronous
 
         public void Insert(Seller seller)
         {

@@ -6,7 +6,7 @@
         public string? Name { get; set; }
         public ICollection<Seller> Sellers { get; } = null!;
 
-        public Department() => Sellers = new List<Seller>();
+        public Department() => Sellers = [];
         public Department(int id, string name) : this()
         {
             ID = id;
