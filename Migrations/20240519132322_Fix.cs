@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace SalesWebMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Fix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,14 +39,14 @@ namespace SalesWebMVC.Migrations
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     BaseSalary = table.Column<double>(type: "double", nullable: false),
-                    DeparmentID = table.Column<int>(type: "int", nullable: false)
+                    DepartmentID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Seller", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Seller_Department_DeparmentID",
-                        column: x => x.DeparmentID,
+                        name: "FK_Seller_Department_DepartmentID",
+                        column: x => x.DepartmentID,
                         principalTable: "Department",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -82,9 +82,9 @@ namespace SalesWebMVC.Migrations
                 column: "SellerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Seller_DeparmentID",
+                name: "IX_Seller_DepartmentID",
                 table: "Seller",
-                column: "DeparmentID");
+                column: "DepartmentID");
         }
 
         /// <inheritdoc />

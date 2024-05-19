@@ -37,7 +37,7 @@ namespace SalesWebMVC.Data
                 entity.Property(e => e.BaseSalary).IsRequired();
 
                 entity.HasOne(e => e.Department).WithMany(d => d.Sellers)
-                .HasForeignKey(e => e.DeparmentID).IsRequired();
+                .HasForeignKey(e => e.DepartmentID).IsRequired();
             });
 
             modelBuilder.Entity<SalesRecord>(entity =>
