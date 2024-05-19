@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWebMVC.Data;
+using SalesWebMVC.Services;
 
 namespace SalesWebMVC
 {
@@ -17,6 +18,9 @@ namespace SalesWebMVC
 
             // Add data service for seeding
             builder.Services.AddScoped<SeedingService>();
+
+            // Add seller service to the scope
+            builder.Services.AddScoped<SellerService>();
 
             var app = builder.Build();
 
