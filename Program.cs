@@ -22,6 +22,9 @@ namespace SalesWebMVC
             // Add seller service to the scope
             builder.Services.AddScoped<SellerService>();
 
+            // Add department service to the scope
+            builder.Services.AddScoped<DepartmentService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

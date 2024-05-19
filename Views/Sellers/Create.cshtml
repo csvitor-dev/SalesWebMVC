@@ -1,4 +1,4 @@
-﻿@model SalesWebMVC.Models.Seller
+﻿@model SalesWebMVC.Models.ViewModels.SellerFormViewModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -11,20 +11,24 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="col-form-labell">
-                <label class="control-label" asp-for="Name">Name:</label>
-                <input class="form-control" asp-for="Name"/>
+                <label class="control-label" asp-for="Seller.Name">Name:</label>
+                <input class="form-control" asp-for="Seller.Name"/>
             </div>
             <div class="col-form-label">
-                <label class="control-label" asp-for="Email">Email:</label>
-                <input class="form-control" asp-for="Email" />
+                <label class="control-label" asp-for="Seller.Email">Email:</label>
+                <input class="form-control" asp-for="Seller.Email" />
             </div>
             <div class="col-form-label">
-                <label class="control-label" asp-for="BirthDate">BirthDate:</label>
-                <input class="form-control" asp-for="BirthDate" />
+                <label class="control-label" asp-for="Seller.BirthDate">BirthDate:</label>
+                <input class="form-control" asp-for="Seller.BirthDate" />
             </div>
             <div class="col-form-label">
-                <label class="control-label" asp-for="BaseSalary">BaseSalary:</label>
-                <input class="form-control" asp-for="BaseSalary" />
+                <label class="control-label" asp-for="Seller.BaseSalary">BaseSalary:</label>
+                <input class="form-control" asp-for="Seller.BaseSalary" />
+            </div>
+            <div class="col-form-label">
+                <label class="control-label" asp-for="Seller.DepartmentID">Department:</label>
+                <select class="form-control" asp-for="Seller.DepartmentID" asp-items="@(new SelectList(Model.Departments, "ID", "Name"))"></select>
             </div>
             <div class="col-form-label">
                 <input class="btn btn-primary" type="submit" value="Create"/>
