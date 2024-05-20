@@ -23,9 +23,20 @@ namespace SalesWebMVC.Services
         {
             var seller = await _context.Seller.FindAsync(id);
 
-            if (seller == null) throw new NotFoundException(nameof(seller));
-            _context.Seller.Remove(seller);
-            await _context.SaveChangesAsync();
+            if (seller == null) throw new NotFoundException("ID not found");
+
+            var hasAnySale = await _context.SalesRecord.AnyAsync(sale => sale.SellerID == seller.ID);
+            if (hasAnySale) throw new IntegrityException("Can't delete seller because he/she has sales");
+
+            try
+            {
+                _context.Seller.Remove(seller);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new IntegrityException(ex.Message);
+            }
         }
 
         public async Task UpdateAsync(Seller seller)

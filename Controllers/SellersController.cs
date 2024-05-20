@@ -62,6 +62,10 @@ namespace SalesWebMVC.Controllers
                 await _sellerService.RemoveAsync(id);
                 return RedirectToAction(nameof(Index));
             }
+            catch (IntegrityException ex)
+            {
+                return RedirectToAction(nameof(Error), new { ex.Message });
+            }
             catch (NotFoundException ex)
             {
                 return RedirectToAction(nameof(Error), new { ex.Message });
