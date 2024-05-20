@@ -30,6 +30,8 @@ namespace SalesWebMVC.Controllers
         [ValidateAntiForgeryToken] // CSRF
         public IActionResult Create(Seller seller)
         {
+            if (ModelState.IsValid == false) return View(seller);
+
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -83,6 +85,16 @@ namespace SalesWebMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller)
         {
+            if (ModelState.IsValid == false)
+            {
+                var departments = _departmentService.FindAll();
+                
+                return View(new SellerFormViewModel(departments)
+                {
+                    Seller = seller
+                });
+            }
+            
             if (id != seller.ID) return RedirectToAction(nameof(Error), new { Message = "ID mismatch" });
             try
             {

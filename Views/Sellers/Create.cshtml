@@ -10,21 +10,26 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <div class="text-danger" asp-validation-summary="All"></div>
             <div class="col-form-label">
                 <label class="control-label" asp-for="Seller.Name">Name:</label>
                 <input class="form-control" asp-for="Seller.Name"/>
+                <span class="text-danger" asp-validation-for="Seller.Name"></span>
             </div>
             <div class="col-form-label">
                 <label class="control-label" asp-for="Seller.Email">Email:</label>
                 <input class="form-control" asp-for="Seller.Email" />
+                <span class="text-danger" asp-validation-for="Seller.Email"></span>
             </div>
             <div class="col-form-label">
                 <label class="control-label" asp-for="Seller.BirthDate">BirthDate:</label>
                 <input class="form-control" asp-for="Seller.BirthDate" />
+                <span class="text-danger" asp-validation-for="Seller.BirthDate"></span>
             </div>
             <div class="col-form-label">
                 <label class="control-label" asp-for="Seller.BaseSalary">BaseSalary:</label>
                 <input class="form-control" asp-for="Seller.BaseSalary" />
+                <span class="text-danger" asp-validation-for="Seller.BaseSalary"></span>
             </div>
             <div class="col-form-label">
                 <label class="control-label" asp-for="Seller.DepartmentID">Department:</label>
@@ -36,3 +41,9 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
