@@ -46,9 +46,9 @@
                     @Html.DisplayFor(modelItem => item.BaseSalary)
                 </td>
                 <td>
-                    <a class="text-info link-underline-opacity-25 link-opacity-75-hover link-underline-opacity-100-hover" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a class="text-info link-underline-opacity-25 link-opacity-75-hover link-underline-opacity-100-hover" asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a class="text-info link-underline-opacity-25 link-opacity-75-hover link-underline-opacity-100-hover" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <a class="text-info" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a class="text-info" asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a class="text-info" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>
         }
