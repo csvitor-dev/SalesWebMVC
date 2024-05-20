@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Globalization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWebMVC.Data;
 using SalesWebMVC.Services;
@@ -34,6 +36,18 @@ namespace SalesWebMVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Applying default localization and formatting (en-US)
+            var enUS = new CultureInfo("en-US");
+            app.UseRequestLocalization(
+                new RequestLocalizationOptions
+                {
+                    DefaultRequestCulture = new RequestCulture(enUS),
+                    SupportedCultures = new List<CultureInfo> { enUS },
+                    SupportedUICultures = new List<CultureInfo> { enUS }
+
+                }
+            );
 
             using (var serviceScope = app.Services.CreateScope())
             {
