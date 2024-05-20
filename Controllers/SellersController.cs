@@ -2,6 +2,7 @@
 using SalesWebMVC.Models;
 using SalesWebMVC.Models.ViewModels;
 using SalesWebMVC.Services;
+using SalesWebMVC.Services.Exceptions;
 
 namespace SalesWebMVC.Controllers
 {
@@ -45,8 +46,15 @@ namespace SalesWebMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            _sellerService.Remove(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                _sellerService.Remove(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         public IActionResult Details(int? id)
@@ -57,6 +65,38 @@ namespace SalesWebMVC.Controllers
             if (seller == null) return NotFound();
 
             return View(seller);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null) return NotFound();
+            var seller = _sellerService.FindByID(id.Value);
+
+            if (seller == null) return NotFound();
+            var departments = _departmentService.FindAll();
+            SellerFormViewModel sellerViewModel = new(departments) { Seller = seller };
+
+            return View(sellerViewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Seller seller)
+        {
+            if (id != seller.ID) return BadRequest($"ID conflit: Id: {id}, seller.ID: {seller.ID}");
+            try
+            {
+                _sellerService.Update(seller);
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (DbConcurrencyException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

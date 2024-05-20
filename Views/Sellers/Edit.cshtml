@@ -1,18 +1,19 @@
 ﻿@model SalesWebMVC.Models.ViewModels.SellerFormViewModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
 <h1>@ViewData["Title"]</h1>
-<h3>Create seller registration</h3>
+<h3>Edit seller registration</h3>
 <hr />
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Seller.ID"/>
             <div class="col-form-label">
                 <label class="control-label" asp-for="Seller.Name">Name:</label>
-                <input class="form-control" asp-for="Seller.Name"/>
+                <input class="form-control" asp-for="Seller.Name" />
             </div>
             <div class="col-form-label">
                 <label class="control-label" asp-for="Seller.Email">Email:</label>
@@ -31,7 +32,7 @@
                 <select class="form-control" asp-for="Seller.DepartmentID" asp-items="@(new SelectList(Model.Departments, "ID", "Name"))"></select>
             </div>
             <div class="col-form-label">
-                <input class="btn btn-primary" type="submit" value="Create"/>
+                <input class="btn btn-info" type="submit" value="Save" />
             </div>
         </form>
     </div>
