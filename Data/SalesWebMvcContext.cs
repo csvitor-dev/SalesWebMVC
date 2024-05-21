@@ -45,7 +45,7 @@ namespace SalesWebMVC.Data
                 entity.HasKey(e => e.ID);
 
                 entity.Property(e => e.Date).IsRequired();
-                entity.Property(e => e.Amout).IsRequired();
+                entity.Property(e => e.Amount).IsRequired();
                 entity.Property(e => e.Status).IsRequired();
 
                 entity.HasOne(e => e.Seller).WithMany(s => s.Sales)

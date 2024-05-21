@@ -41,7 +41,7 @@ namespace SalesWebMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<double>("Amout")
+                    b.Property<double>("Amount")
                         .HasColumnType("double");
 
                     b.Property<DateTime>("Date")

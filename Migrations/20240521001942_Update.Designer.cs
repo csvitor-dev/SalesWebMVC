@@ -11,8 +11,8 @@ using SalesWebMVC.Data;
 namespace SalesWebMVC.Migrations
 {
     [DbContext(typeof(SalesWebMvcContext))]
-    [Migration("20240519132322_Fix")]
-    partial class Fix
+    [Migration("20240521001942_Update")]
+    partial class Update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,7 +44,7 @@ namespace SalesWebMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<double>("Amout")
+                    b.Property<double>("Amount")
                         .HasColumnType("double");
 
                     b.Property<DateTime>("Date")

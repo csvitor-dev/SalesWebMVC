@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace SalesWebMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class Fix : Migration
+    public partial class Update : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,7 +60,7 @@ namespace SalesWebMVC.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Amout = table.Column<double>(type: "double", nullable: false),
+                    Amount = table.Column<double>(type: "double", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     SellerID = table.Column<int>(type: "int", nullable: false)
                 },
