@@ -49,8 +49,8 @@ namespace SalesWebMVC.Models
 
         public double TotalSales(DateTime initial, DateTime final)
         {
-            // double query = (from record in Sales where record.Date >= initial && record.Date <= final select record.Amout).Sum();
-            double query = Sales.Where(record => record.Date >= initial && record.Date <= final).Sum(record => record.Amout);
+            // double query = (from record in Sales where record.Date >= initial && record.Date <= final select record.Amount).Sum();
+            double query = Sales.Where(record => record.Date >= initial && record.Date <= final).Sum(record => record.Amount);
             return query;
         }
     }

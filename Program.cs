@@ -27,6 +27,9 @@ namespace SalesWebMVC
             // Add department service to the scope
             builder.Services.AddScoped<DepartmentService>();
 
+            // Add sales record service to the scope
+            builder.Services.AddScoped<SalesRecordService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -43,8 +46,8 @@ namespace SalesWebMVC
                 new RequestLocalizationOptions
                 {
                     DefaultRequestCulture = new RequestCulture(enUS),
-                    SupportedCultures = new List<CultureInfo> { enUS },
-                    SupportedUICultures = new List<CultureInfo> { enUS }
+                    SupportedCultures = [enUS],
+                    SupportedUICultures = [enUS]
 
                 }
             );
