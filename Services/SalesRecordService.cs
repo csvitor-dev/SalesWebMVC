@@ -8,6 +8,19 @@ namespace SalesWebMVC.Services
     {
         private readonly SalesWebMvcContext _context = context;
 
+        public async Task<DateTime> FindEarliestDateAsync()
+        {
+            var queryDate = from sales in _context.SalesRecord select sales.Date;
+
+            return await queryDate.MinAsync();
+        }
+        public async Task<DateTime> FindLatestDateAsync()
+        {
+            var queryDate = from sales in _context.SalesRecord select sales.Date;
+
+            return await queryDate.MaxAsync();
+        }
+
         public async Task<List<SalesRecord>> FindByDateAsync(DateTime? minimumDate, DateTime? maximumDate)
         {
             var query = from sales in _context.SalesRecord select sales;

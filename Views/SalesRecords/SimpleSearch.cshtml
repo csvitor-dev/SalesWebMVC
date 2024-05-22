@@ -8,18 +8,16 @@
 
 <nav class="navbar navbar-inverse bg-primary">
     <div class="container-fluid">
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form" role="search">
             <div class="col-form-label">
-                <div class="col-form-label">
-                    <label for="minDate">Min Date</label>
-                    <input type="date" class="form-control" name="minDate" value=@ViewData["minDate"] />
-                </div>
-                <div class="col-form-label">
-                    <label for="maxDate">Max Date</label>
-                    <input type="date" class="form-control" name="maxDate" value=@ViewData["maxDate"] />
-                </div>
+                <label for="minimumDate">Minimum Date</label>
+                <input type="date" class="form-control" name="minimumDate" value=@ViewData["minimumDate"] />
             </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
+            <div class="col-form-label">
+                <label for="maximumDate">Maximum Date</label>
+                <input type="date" class="form-control" name="maximumDate" value=@ViewData["maximumDate"] />
+            </div>
+            <button type="submit" class="btn btn-info">Filter</button>
         </form>
     </div>
 </nav>
@@ -30,7 +28,7 @@
     <div class="panel-body">
         <table class="table table-striped table-hover">
             <thead>
-                <tr class="success">
+                <tr class="table-primary">
                     <th>
                         @Html.DisplayNameFor(model => model.ID)
                     </th>
