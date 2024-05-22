@@ -5,7 +5,7 @@ namespace SalesWebMVC.Models
 {
     public class SalesRecord
     {
-        public int ID { get; }
+        public int ID { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
