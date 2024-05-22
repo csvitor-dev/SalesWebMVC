@@ -30,6 +30,9 @@ namespace SalesWebMVC
             // Add sales record service to the scope
             builder.Services.AddScoped<SalesRecordService>();
 
+            // Add GitHub profile service to the scope
+            builder.Services.AddScoped<GitHubService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
