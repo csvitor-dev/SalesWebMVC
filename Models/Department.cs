@@ -1,8 +1,13 @@
-﻿namespace SalesWebMVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SalesWebMVC.Models
 {
     public class Department
     {
         public int ID { get; set; }
+
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(60, MinimumLength = 5, ErrorMessage = "{0} size should be between {2} and {1}")]
         public string? Name { get; set; }
         public ICollection<Seller> Sellers { get; } = null!;
 
