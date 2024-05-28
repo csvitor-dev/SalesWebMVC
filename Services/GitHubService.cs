@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using SalesWebMVC.Models;
 
 namespace SalesWebMVC.Services
 {

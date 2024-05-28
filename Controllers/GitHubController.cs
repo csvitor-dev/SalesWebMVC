@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SalesWebMVC.Services;
-
-namespace SalesWebMVC.Controllers
+﻿namespace SalesWebMVC.Controllers
 {
     public class GitHubController(GitHubService gitHubService) : Controller
     {

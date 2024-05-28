@@ -1,5 +1,4 @@
-﻿using SalesWebMVC.Models;
-using SalesWebMVC.Models.Enums;
+﻿using SalesWebMVC.Models.Enums;
 
 namespace SalesWebMVC.Data
 {

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using SalesWebMVC.Models;
-
-namespace SalesWebMVC.Data
+﻿namespace SalesWebMVC.Data
 {
     public class SalesWebMvcContext(DbContextOptions<SalesWebMvcContext> options) : DbContext(options)
     {

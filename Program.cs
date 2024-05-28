@@ -1,9 +1,5 @@
 ﻿using System.Globalization;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.DependencyInjection;
-using SalesWebMVC.Data;
-using SalesWebMVC.Services;
 
 namespace SalesWebMVC
 {
