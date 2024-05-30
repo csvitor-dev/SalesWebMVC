@@ -10,7 +10,7 @@
 
             try
             {
-                var gitHubUser = await _gitHubService.GetGitHubUserAsync(username);
+                var gitHubUser = await _gitHubService.GetGitHubUserAsync(username!);
 
                 if (gitHubUser == null) return NotFound();
 
