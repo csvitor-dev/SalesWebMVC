@@ -1,10 +1,11 @@
 ﻿@model SalesWebMVC.Models.ViewModels.SellerFormViewModel
 @{
     ViewData["Title"] = "Create";
+    ViewData["Description"] = "Create seller registration";
 }
 
 <h1>@ViewData["Title"]</h1>
-<h3>Create seller registration</h3>
+<h3>@ViewData["Description"]</h3>
 <hr />
 
 <div class="row">
@@ -13,7 +14,7 @@
             <div class="text-danger" asp-validation-summary="All"></div>
             <div class="col-form-label">
                 <label class="control-label" asp-for="Seller.Name">Name:</label>
-                <input class="form-control" asp-for="Seller.Name"/>
+                <input class="form-control" asp-for="Seller.Name" />
                 <span class="text-danger" asp-validation-for="Seller.Name"></span>
             </div>
             <div class="col-form-label">
@@ -36,10 +37,14 @@
                 <select class="form-control" asp-for="Seller.DepartmentID" asp-items="@(new SelectList(Model.Departments, "ID", "Name"))"></select>
             </div>
             <div class="col-form-label">
-                <input class="btn btn-primary" type="submit" value="Create"/>
+                <input class="btn btn-primary rounded" type="submit" value="Create" />
             </div>
         </form>
     </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-primary rounded" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
