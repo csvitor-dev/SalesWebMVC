@@ -1,10 +1,11 @@
 ﻿@model SalesWebMVC.Models.ViewModels.SellerFormViewModel
 @{
     ViewData["Title"] = "Edit";
+    ViewData["Description"] = "Edit seller registration";
 }
 
 <h1>@ViewData["Title"]</h1>
-<h3>Edit seller registration</h3>
+<h3>@ViewData["Description"]</h3>
 <hr />
 
 <div class="row">
@@ -37,10 +38,14 @@
                 <select class="form-control" asp-for="Seller.DepartmentID" asp-items="@(new SelectList(Model.Departments, "ID", "Name"))"></select>
             </div>
             <div class="col-form-label">
-                <input class="btn btn-info" type="submit" value="Save" />
+                <input class="btn btn-primary rounded" type="submit" value="Save" />
             </div>
         </form>
     </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-primary rounded" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
