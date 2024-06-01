@@ -8,21 +8,23 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<nav class="navbar">
-    <div class="container-fluid">
-        <div class="col-form-label bg-dark text-light row">
-            <form class="navbar-form" role="search">
-                <div class="col-form-label">
-                    <label for="minimumDate">Minimum Date</label>
-                    <input type="date" class="form-control" name="minimumDate" value=@ViewData["minimumDate"] />
+<nav class="navbar justify-content-center">
+    <div class="col-form-label p-2 w-50 bg-dark text-light rounded">
+        <form class="navbar-form" role="search">
+            <div class="col-form-label">
+                <label for="minimumDate">Minimum Date</label>
+                <input type="date" class="form-control" name="minimumDate" value=@ViewData["minimumDate"] />
+            </div>
+            <div class="col-form-label">
+                <label for="maximumDate">Maximum Date</label>
+                <input type="date" class="form-control" name="maximumDate" value=@ViewData["maximumDate"] />
+            </div>
+            <div class="col-form-label d-flex justify-content-center">
+                <div class="col-lg-10 col-lg-offset-2 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-info rounded">Filter</button>
                 </div>
-                <div class="col-form-label">
-                    <label for="maximumDate">Maximum Date</label>
-                    <input type="date" class="form-control" name="maximumDate" value=@ViewData["maximumDate"] />
-                </div>
-                <button type="submit" class="btn btn-info">Filter</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </nav>
 

@@ -3,26 +3,23 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-<div class="row">
-    <div class="col-md-6">
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6 bg-dark text-light rounded">
         <form class="form-horizontal" asp-action="SimpleSearch">
             <fieldset>
-                <legend>Simple search</legend>
-                <div class="row-form-label">
-                    <label for="minimumDate" class="col-lg-2 control-label">Minimum Date</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="minimumDate" class="form-control" />
-                    </div>
+                <legend class="mt-2">Simple search</legend>
+                <div class="col-form-label">
+                    <label for="minimumDate" class="col-lg-2 control-label w-50">MINIMUM DATE</label>
+                    <input type="date" name="minimumDate" class="form-control" />
                 </div>
-                <div class="row-form-label">
-                    <label for="maximumDate" class="col-lg-2 control-label">Maximum Date</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="maximumDate" class="form-control" />
-                    </div>
+                <div class="col-form-label">
+                    <label for="maximumDate" class="col-lg-2 control-label w-50">MAXIMUM DATE</label>
+                    <input type="date" name="maximumDate" class="form-control" />
                 </div>
-                <div class="row-form-label">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-info">Submit</button>
+                <div class="col-form-label d-flex justify-content-center">
+                    <div class="col-lg-10 col-lg-offset-2 d-flex justify-content-center">
+                        <button class="btn btn-info rounded" type="submit">Submit</button>
                     </div>
                 </div>
             </fieldset>
@@ -30,26 +27,22 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
+<div class="row d-flex justify-content-center mt-3">
+    <div class="col-md-6 bg-dark text-light rounded">
         <form class="form-horizontal" asp-action="GroupingSearch">
             <fieldset>
-                <legend>Grouping search</legend>
-                <div class="row-form-label">
-                    <label for="minimumDate" class="col-lg-2 control-label">Minimum Date</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="minimumDate" class="form-control" />
-                    </div>
+                <legend class="mt-2">Grouping search</legend>
+                <div class="col-form-label">
+                    <label for="minimumDate" class="col-lg-2 control-label w-50">MINIMUM DATE</label>
+                    <input type="date" name="minimumDate" class="form-control" />
                 </div>
-                <div class="row-form-label">
-                    <label for="maximumDate" class="col-lg-2 control-label">Maximum Date</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="maximumDate" class="form-control" />
-                    </div>
+                <div class="col-form-label">
+                    <label for="maximumDate" class="col-lg-2 control-label w-50">MAXIMUM DATE</label>
+                    <input type="date" name="maximumDate" class="form-control" />
                 </div>
-                <div class="row-form-label">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-info">Submit</button>
+                <div class="col-form-label d-flex justify-content-center">
+                    <div class="col-lg-10 col-lg-offset-2 d-flex justify-content-center">
+                        <button class="btn btn-info rounded" type="submit">Submit</button>
                     </div>
                 </div>
             </fieldset>

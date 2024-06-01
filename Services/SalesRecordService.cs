@@ -34,7 +34,7 @@
                 .ToListAsync();
         }
 
-        public async Task<List<IGrouping<Department, SalesRecord>>> FindByDataGroupingAsync(DateTime? minimumDate, DateTime? maximumDate)
+        public async Task<List<IGrouping<Department?, SalesRecord>>> FindByDataGroupingAsync(DateTime? minimumDate, DateTime? maximumDate)
         {
             var query = from sales in _context.SalesRecord select sales;
 
