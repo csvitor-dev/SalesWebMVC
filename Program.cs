@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
+using System.Web;
 using Microsoft.AspNetCore.Localization;
+using SalesWebMVC.Controllers;
 
 namespace SalesWebMVC
 {
@@ -67,8 +69,18 @@ namespace SalesWebMVC
             app.UseAuthorization();
 
             app.MapControllerRoute(
+                name: "custom",
+                pattern: "About/{action}/{id?}",
+                defaults: new
+                {
+                    controller = "GitHub",
+                    action = "Index",
+                });
+
+            app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
             app.Run();
         }

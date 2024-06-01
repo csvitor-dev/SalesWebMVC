@@ -18,7 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>Actions</th>
+            <th class="d-flex justify-content-end">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -28,7 +28,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="d-flex justify-content-end">
                     <a class="btn btn-primary rounded m-1" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
                     <a class="btn btn-info rounded m-1" asp-action="Details" asp-route-id="@item.ID">Details</a>
                     <a class="btn btn-danger rounded m-1" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
