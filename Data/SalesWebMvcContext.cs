@@ -8,7 +8,7 @@
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=saleswebmvcdb;user=MVCuser;password=mVC#1246;");
+            optionsBuilder.UseMySQL(Configuration.ConnectionString);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

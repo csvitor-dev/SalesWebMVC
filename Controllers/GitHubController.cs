@@ -4,7 +4,7 @@
     {
         private readonly GitHubService _gitHubService = gitHubService;
 
-        public async Task<IActionResult> Index(string? username = "csdev-aOSE")
+        public async Task<IActionResult> Index(string? username = Configuration.GitHubDefaultUsername)
         {
             if (ModelState.IsValid == false) return BadRequest();
 
