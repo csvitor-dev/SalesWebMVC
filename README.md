@@ -156,7 +156,45 @@ Compile a aplicação e corrija os potenciais erros que possa aparecer (qualquer
 
 ### _Migrations_
 
-...
+Só um acréscimo quanto a criação de migrações e atualização do contexto do banco de dados:
+como no curso se utiliza o terminal do gerenciado de pacotes no _**Visual Studio**_, não serão os mesmos comandos no terminal padrão para quem utilizar o _**Visual Studio Code**_.
+
+Então, será necessário adicionar uma ferramenta adicional, o `dotnet ef`; com este comando, podemos gerenciar o **EF** pelo _CLI_.
+
+> Começaremos instalando essa ferramenta:
+>
+> ```bash
+> dotnet tool install --global dotnet-ef
+> dotnet ef
+> ```
+>
+> O último comando apresenta a interface padrão do _CLI_ como verificação da instalação.
+>
+> Feito isso, basta seguir tais comandos:
+>
+> **Criação de _Migrations_**
+>
+> ```bash
+> dotnet ef migrations add Initial
+> ```
+>
+> que equivale a:
+>
+> ```bash
+> Add-Migration Initial
+> ```
+>
+> **Atualização do Banco de Dados**
+>
+> ```bash
+> dotnet ef database update Initial
+> ```
+>
+> que equivale a:
+>
+> ```bash
+> Update-Database Initial
+> ```
 
 ## Detalhes de implementação
 
