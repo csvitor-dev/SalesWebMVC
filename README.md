@@ -55,7 +55,8 @@ dotnet add package MySql.EntityFrameworkCore --version 8.0.2
 ```
 
 - Pelo _**Package Manager**_:
-  ![Package Manager Console do Visual Studio](./Materials/package-manager.png)
+
+![Package Manager Console do Visual Studio](./Materials/package-manager.png)
 
 ```bash
 PM> Install-Package MySql.Data -Version 8.4.0
@@ -77,8 +78,6 @@ Logo, em caso de sucesso, haverá as seguintes linhas no seu `YourMvcProject.csp
     <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.2" />
 </ItemGroup>
 ```
-
-> Qualquer outro pacote que seja referenciado automaticamente, como `Microsoft.EntityFrameworkCore.Tools`, são necessários para se trabalhar com o **EF** Core.
 
 Desta maneira, considerando que tudo tenha ocorrido bem, basta adicionarmos as configurações em nossa aplicação. Para isso, faremos alguns passos.
 
@@ -120,12 +119,11 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 Basta adicionar (ou editar) a seguinte linha:
 
 ```json
-...
+//...
     "ConnectionStrings": {
         "DefaultConnection": "server=...;database=...;user=...;password=..."
     }
-    // o nome da string pode ser qualquer um, mas seja descritivo
-...
+//...
 ```
 
 ### Em `Program.cs`
@@ -138,7 +136,10 @@ Por fim, só basta injetar o contexto do banco na aplicação propriamente, have
 ...
 builder.Services
         .AddDbContext<YourMvcProjectContext>(options =>
-            options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found."), opt => opt.MigrationsAssembly("YourMvcProject")));
+            options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection") ??
+            throw new InvalidOperationException("Connection string 'DefaultConnection' not found."),
+            opt => opt.MigrationsAssembly("YourMvcProject"))
+        );
 ...
 ```
 
@@ -148,7 +149,10 @@ builder.Services
 ...
 builder.Services
         .AddDbContext<YourMvcProjectContext>(options =>
-            options.UseMySQL(Configuration.ConnectionString ?? throw new InvalidOperationException("Connection string not found."), opt => opt.MigrationsAssembly("YourMvcProject")));
+            options.UseMySQL(Configuration.ConnectionString ??
+            throw new InvalidOperationException("Connection string not found."),
+            opt => opt.MigrationsAssembly("YourMvcProject"))
+        );
 ...
 ```
 
@@ -161,41 +165,87 @@ como no curso se utiliza o terminal do gerenciado de pacotes no _**Visual Studio
 
 Então, será necessário adicionar uma ferramenta adicional, o `dotnet ef`; com este comando, podemos gerenciar o **EF** pelo _CLI_.
 
-> Começaremos instalando essa ferramenta:
->
-> ```bash
-> dotnet tool install --global dotnet-ef
-> dotnet ef
-> ```
->
-> O último comando apresenta a interface padrão do _CLI_ como verificação da instalação.
->
-> Feito isso, basta seguir tais comandos:
->
-> **Criação de _Migrations_**
->
-> ```bash
-> dotnet ef migrations add Initial
-> ```
->
-> que equivale a:
->
-> ```bash
-> Add-Migration Initial
-> ```
->
-> **Atualização do Banco de Dados**
->
-> ```bash
-> dotnet ef database update Initial
-> ```
->
-> que equivale a:
->
-> ```bash
-> Update-Database Initial
-> ```
+Começaremos instalando essa ferramenta:
+
+```bash
+dotnet tool install --global dotnet-ef
+dotnet ef
+```
+
+O último comando apresenta a interface padrão do _CLI_ como verificação da instalação.
+
+Feito isso, basta seguir tais comandos:
+
+**Criação de _Migrations_**
+
+```bash
+dotnet ef migrations add Initial
+```
+
+que equivale a:
+
+```bash
+Add-Migration Initial
+```
+
+**Atualização do Banco de Dados**
+
+```bash
+dotnet ef database update Initial
+```
+
+que equivale a:
+
+```bash
+Update-Database Initial
+```
 
 ## Detalhes de implementação
 
-...
+O último ponto que tenho a dizer, é sobre as configurações de injenção de dependência e entre outras configurações adicionais no **ASP.NET**, que desde o **.NET 6** ocorre na classe `Program.cs` não havendo mais a necessidade de uma classe intermediária de configurações -- pelo menos, em caso não tão complexos/extensos --, a classe `Startup.cs`.
+
+> Seria interessante ter classes à parte para injetar muitas configurações e dependências (ou utilizando _extension methods_) para justamente evitar que a classe `Program.cs` se torne muito carregada.
+>
+> Isto é, reinserir a classe `Startup.cs`. Mas quando de fato se ver como necessário fazer isso.
+
+### Os serviços e o `SeedingService.cs`
+
+Os quatro serviços criados durante o projeto (assim como o serviço que eu criei, o `GitHubService.cs`), não diferem tanto do que foi mostrado pelo Nélio, mas é necessário ter atenção aonde adicionar as referências aos serviços na classe `Program.cs`. Como estamos falando de injetá-los na aplicação, precisamos **adicioná-los** ao contexto logo após criar o `builder`:
+
+```cs
+var builder = WebApplication.CreateBuilder(args);
+
+// other services...
+
+// Add data service for seeding
+builder.Services.AddScoped<SeedingService>();
+
+// Add seller service to the scope
+builder.Services.AddScoped<SellerService>();
+
+// Add department service to the scope
+builder.Services.AddScoped<DepartmentService>();
+
+// Add sales record service to the scope
+builder.Services.AddScoped<SalesRecordService>();
+
+// Add GitHub profile service to the scope
+builder.Services.AddScoped<GitHubService>();
+
+var app = builder.Build();
+```
+
+Já no caso da classe `SeddingService.cs`, a sua configuração é um tanto diferente do que fora mostrado pelo Nélio -- exceto pela sua injeção, que é da mesma maneira dos outros serviços, como é mostrado anteriormente --, sendo necessário criar um escopo para aí sim chamar o método `.Seed()`:
+
+```cs
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+    var seedingService = services.GetRequiredService<SeedingService>();
+    seedingService.Seed();
+}
+```
+
+> Foi um tanto complicado achar uma solução para este último, então recomendo olhar a documentação do [_**ASP.NET** sobre injeção de dependências_](https://learn.microsoft.com/pt-br/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0#resolve-a-service-at-app-start-up).
+
+Caso seja mais interessante ao seu caso, pode adicionar uma classe `Startup.cs` -- na verdade, o nome que lhe for adequado --, como anteriormente dito, e adicionar o código necessário para segregar as configurações de serviços e tudo mais da classe `Program.cs`.
